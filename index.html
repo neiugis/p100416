@@ -24,30 +24,32 @@
         margin-right: 8px;
         opacity: 0.7;
     }
+    html, body{ height:100%; padding:0; margin:0;}
+
+    #map{
+      min-height: 100%;
+    }
 </style>
    </head>
 
    <body>
-
-     <h1> Effects of Classification Methods</h1>
-     <h2> Change classification methods from the upper right corner to display the corresponding patterns.</h2>
-       <div id="map" style="height: 700px"></div>
+       <div id="map"></div>
 
        <script type="text/javascript">
          var map = L.map('map').setView([51.48,-0.07], 10);
 // basemaps
          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-           maxZoom: 11,
-           minZoom: 5,
+           maxZoom: 10,
+           minZoom: 10,
            id: 'mapbox.light',
            accessToken: 'pk.eyJ1IjoiY3VyZW1hbmdvIiwiYSI6ImNpcTQ4cGFwbDAxbmVmd25vZGNiOTVzeGEifQ.GWZByYkIft6eMRha69C8nw'
          }).addTo(map);
 
 //functions for map styles: three classification methods
          function getColor_nb(value) {
-              return value > 139 ? '#54278f':
-                     value > 87  ? '#756bb1':
+              return value > 111 ? '#54278f':
+                     value > 80  ? '#756bb1':
                      value > 53  ? '#9e9ac8':
                      value > 32  ? '#cbc9e2':
                                    '#f2f0f7';
@@ -65,10 +67,10 @@
           }
 
           function getColor_q(value) {
-               return value > 104 ? '#54278f':
-                      value > 78  ? '#756bb1':
+               return value > 102 ? '#54278f':
+                      value > 73  ? '#756bb1':
                       value > 49  ? '#9e9ac8':
-                      value > 41  ? '#cbc9e2':
+                      value > 39  ? '#cbc9e2':
                                     '#f2f0f7';
            }
 
@@ -83,10 +85,10 @@
            }
 
            function getColor_ei(value) {
-                return value > 580 ? '#54278f':
-                       value > 440  ? '#756bb1':
-                       value > 300  ? '#9e9ac8':
-                       value > 160  ? '#cbc9e2':
+                return value > 115 ? '#54278f':
+                       value > 91  ? '#756bb1':
+                       value > 68  ? '#9e9ac8':
+                       value > 44  ? '#cbc9e2':
                                      '#f2f0f7';
             }
 
@@ -121,7 +123,7 @@
          legend_nb.onAdd = function (map) {
 
            var div = L.DomUtil.create('div', 'legend'),
-            grades = [0, 32, 53, 87, 139]; // The break values to define the intervals of population, note we begin from 0 here
+            grades = [0, 32, 53, 80, 111]; // The break values to define the intervals of population, note we begin from 0 here
 
           div.innerHTML = '<b>Population Density <br> Natural Breaks <br></b>'; // The legend title, in this case it's Population Density 2011
 
@@ -139,7 +141,7 @@
       legend_q.onAdd = function (map) {
 
         var div = L.DomUtil.create('div', 'legend'),
-         grades = [0, 41, 49, 78, 104]; // The break values to define the intervals of population, note we begin from 0 here
+         grades = [0, 39, 49, 73, 102]; // The break values to define the intervals of population, note we begin from 0 here
 
        div.innerHTML = '<b>Population Density <br> Quantile <br></b>'; // The legend title, in this case it's Population Density 2011
 
@@ -157,7 +159,7 @@
       legend_ei.onAdd = function (map) {
 
         var div = L.DomUtil.create('div', 'legend'),
-         grades = [0, 160, 300, 440, 580]; // The break values to define the intervals of population, note we begin from 0 here
+         grades = [0, 44, 68, 91, 115]; // The break values to define the intervals of population, note we begin from 0 here
 
        div.innerHTML = '<b>Population Density <br> Equal Interval <br></b>'; // The legend title, in this case it's Population Density 2011
 
